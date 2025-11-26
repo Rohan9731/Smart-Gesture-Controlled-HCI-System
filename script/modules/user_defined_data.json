@@ -1,0 +1,26 @@
+{
+  "_id": "088fc35cc6c7-Rohan",
+  "name": "Rohan",
+  "userDefinedControls": {
+    "index": [
+      "msedge.exe",
+      "microsoft-edge:",
+      "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    ],
+    "index and middle": [
+      "spotify.exe",
+      "C:\\Users\\%USERNAME%\\AppData\\Roaming\\Spotify\\Spotify.exe"
+    ],
+    "index, middle and ring": [
+      "excel.exe",
+      "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
+    ],
+    "index, middle, ring and little": [
+      "cmd.exe"
+    ],
+    "thumb": [
+      "winword.exe",
+      "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE"
+    ]
+  }
+}
