@@ -36,31 +36,34 @@ An enterprise-grade Human-Computer Interaction (HCI) system that enables **conta
 
 ## 📸 Project Snapshots & Demonstrations
 
-### Main Application Interface
-
-![Main Application Interface](screenshots/main_interface.png)
-*Modern dark-themed GUI with menu panel, live camera feed, and status display running at 30 FPS*
-
----
-
-### Customization Screen
-
-![Customization Interface](screenshots/customization_screen.png)
-*User-friendly interface to map custom gestures to your favorite applications*
-
----
-
-### Tutorial Mode
-
-![Tutorial Mode](screenshots/tutorial_screen.png)
-*Interactive tutorial with animated demonstrations for learning each gesture*
-
----
-
-### Virtual Keyboard
-
-![Virtual Keyboard](screenshots/virtual_keyboard.png)
-*Full QWERTY on-screen keyboard with click-to-type functionality*
+<table>
+  <tr>
+    <td align="center">
+      <img src="screenshots/main_interface.png" width="400" alt="Main Interface"/>
+      <br /><em>Main Application Interface</em>
+    </td>
+    <td align="center">
+      <img src="screenshots/customization_screen.png" width="400" alt="Customization Screen"/>
+      <br /><em>Customization Screen</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/tutorial_screen.png" width="400" alt="Tutorial Mode"/>
+      <br /><em>Tutorial Mode</em>
+    </td>
+    <td align="center">
+      <img src="screenshots/virtual_keyboard.png" width="400" alt="Virtual Keyboard"/>
+      <br /><em>Virtual Keyboard</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <img src="screenshots/game_control.png" width="400" alt="Game Control"/>
+      <br /><em>Game Control Mode</em>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -87,23 +90,6 @@ The project includes pre-rendered GIF animations demonstrating each control mode
 | **Custom App Launcher** | ![Mode Select](animations/7.gif) | ![Action](animations/18.gif) | User-defined apps with 5 programmable gesture slots |
 
 *These tutorial assets are already included in the `animations/` folder and play automatically in the application's Tutorial mode.*
-
----
-
-### How to Add Your Screenshots
-
-1. Run the application: `python main.py`
-2. Capture screenshots using:
-   - **Windows:** `Windows + Shift + S` (Snipping Tool)
-   - **macOS:** `Cmd + Shift + 4`
-3. Save these 5 images to the `screenshots/` folder:
-   - `main_interface.png` - Main application screen
-   - `customization_screen.png` - Gesture customization page
-   - `tutorial_screen.png` - Tutorial mode with animations
-   - `virtual_keyboard.png` - On-screen keyboard
-   - `game_control.png` - Game control mode
-
-> **Note:** The animated GIF tutorials (animations/1.gif - 9.gif) are already included in the project!
 
 ---
 
@@ -197,30 +183,31 @@ The project includes pre-rendered GIF animations demonstrating each control mode
 │  └──────────────────┬───────────────────────────────────────┘  │
 └─────────────────────┼──────────────────────────────────────────┘
                       │
-                      ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                  GESTURE CONTROL ENGINE                         │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │         GestureControl (gesture_control.py)              │  │
-│  │  • State Machine     • Mode Selector     • Dispatcher    │  │
-│  │  • Frame Processor   • Gesture Classifier                │  │
-│  └──────────────────┬───────────────────────────────────────┘  │
-└─────────────────────┼──────────────────────────────────────────┘
-                      │
-        ┌─────────────┼─────────────┐
-        │             │             │
-        ▼             ▼             ▼
-┌──────────────┐ ┌──────────────┐ ┌──────────────┐
-│  Hand Tracker│ │ Control Modes│ │  Resources   │
-│  (MediaPipe) │ │  (Modules)   │ │ (Config/DB)  │
-└──────────────┘ └──────────────┘ └──────────────┘
-        │             │             │
-        │             │             │
-        ▼             ▼             ▼
-┌──────────────┐ ┌──────────────┐ ┌──────────────┐
-│ Camera Input │ │ System APIs  │ │ MongoDB Atlas│
-│  (OpenCV)    │ │ (PyAutoGUI)  │ │  (Cloud DB)  │
-└──────────────┘ └──────────────┘ └──────────────┘
+                          ▼
+    ┌─────────────────────────────────────────────────────┐
+    │           GESTURE CONTROL ENGINE                    │
+    │  ┌──────────────────────────────────────────────┐   │
+    │  │    GestureControl (gesture_control.py)       │   │
+    │  │  • State Machine    • Mode Selector          │   │
+    │  │  • Frame Processor  • Gesture Classifier     │   │
+    │  └──────────────────┬───────────────────────────┘   │
+    └─────────────────────┼─────────────────────────────────┘
+                          │
+          ┌───────────────┼───────────────┐
+          │               │               │
+          ▼               ▼               ▼
+    ┌──────────┐    ┌──────────┐    ┌──────────┐
+    │   Hand   │    │ Control  │    │Resources │
+    │ Tracker  │    │  Modes   │    │ (Config/ │
+    │(MediaPipe)│    │(Modules) │    │   DB)    │
+    └─────┬────┘    └─────┬────┘    └─────┬────┘
+          │               │               │
+          ▼               ▼               ▼
+    ┌──────────┐    ┌──────────┐    ┌──────────┐
+    │  Camera  │    │  System  │    │ MongoDB  │
+    │  Input   │    │   APIs   │    │  Atlas   │
+    │ (OpenCV) │    │(PyAutoGUI)│    │(Cloud DB)│
+    └──────────┘    └──────────┘    └──────────┘
 ```
 
 ### Project Structure (Clean Architecture)
