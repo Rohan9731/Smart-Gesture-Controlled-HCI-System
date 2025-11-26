@@ -57,20 +57,7 @@ An enterprise-grade Human-Computer Interaction (HCI) system that enables **conta
       <br /><em>Virtual Keyboard</em>
     </td>
   </tr>
-  <tr>
-    <td align="center" colspan="2">
-      <img src="screenshots/game_control.png" width="400" alt="Game Control"/>
-      <br /><em>Game Control Mode</em>
-    </td>
-  </tr>
 </table>
-
----
-
-### Game Control Mode
-
-![Game Control](screenshots/game_control.png)
-*Gesture-based gaming controls for directional movement (WASD/Arrow keys)*
 
 ---
 
@@ -772,70 +759,6 @@ python main.py
 
 ---
 
-### 🐛 Common Issues & Solutions
-
-<details>
-<summary><b>Error: ModuleNotFoundError: No module named 'customtkinter'</b></summary>
-
-**Cause:** Dependencies not installed or wrong environment
-
-**Solution:**
-```bash
-# Check virtual environment is activated
-which python  # macOS (should show .venv)
-where python  # Windows (should show .venv)
-
-# Reinstall dependencies
-pip install -r requirements_windows.txt
-```
-</details>
-
-<details>
-<summary><b>Error: pymongo.errors.ConfigurationError</b></summary>
-
-**Cause:** Invalid MongoDB connection string
-
-**Solution:**
-1. Check `.env` file exists: `cat .env`
-2. Verify format: `MONGODB.URI=mongodb+srv://...`
-3. No spaces around `=`
-4. Replace `<password>` with actual password
-5. Check MongoDB IP whitelist (0.0.0.0/0)
-</details>
-
-<details>
-<summary><b>Error: Cannot open camera / Camera not found</b></summary>
-
-**Cause:** Camera in use or no permissions
-
-**Solution:**
-1. Close other apps (Zoom, Teams, etc.)
-2. Check camera permissions (Step 6)
-3. Try different camera index in `gesture_control.py`:
-   ```python
-   self.cap = cv2.VideoCapture(1)  # Try 0, 1, or 2
-   ```
-4. Restart computer
-</details>
-
-<details>
-<summary><b>Gestures not detected / Poor tracking</b></summary>
-
-**Cause:** Lighting, distance, or background issues
-
-**Solution:**
-1. Ensure good lighting (not backlit)
-2. Distance: 1-2 feet from camera
-3. Clear background behind hands
-4. Steady hand movements
-5. Adjust MediaPipe confidence in `tracker.py`:
-   ```python
-   min_detection_confidence=0.5  # Lower for easier detection
-   ```
-</details>
-
----
-
 ## 📖 User Guide
 
 ### Customizing Gesture Shortcuts
@@ -853,44 +776,6 @@ pip install -r requirements_windows.txt
 - Office (Word, Excel, PowerPoint)
 - Media (VLC, Spotify, Photos)
 - Utilities (Command Prompt, Task Manager)
-
----
-
-## 🧪 Testing & Quality Assurance
-
-**Run unit tests:**
-```bash
-# All tests
-python -m unittest discover testing/unit_tests
-
-# Specific test
-python -m unittest testing.unit_tests.test_tracker
-
-# With verbose output
-python -m unittest discover -v testing/unit_tests
-```
-
-**Test Coverage:**
-- `test_tracker.py` - Hand detection & finger classification
-- `test_app_control.py` - Window switching & management
-- `test_browser_control.py` - Browser automation
-- `test_media_and_brightness_control.py` - Volume/brightness
-
----
-
-## 📊 UML System Design
-
-Professional UML diagrams available in `uml_diagrams/` (PlantUML format):
-
-- **activity.puml** - System workflow & state transitions
-- **class.puml** - Class structure & relationships
-- **sequence.puml** - Component interactions
-- **use_case.puml** - User interaction scenarios
-
-**View/edit with:**
-- [PlantUML Online](http://www.plantuml.com/plantuml/)
-- VS Code extension: `jebbs.plantuml`
-- IntelliJ IDEA plugin
 
 ---
 
