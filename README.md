@@ -92,17 +92,28 @@ The project includes pre-rendered GIF animations demonstrating each control mode
 - Scroll gesture with speed control
 - Platform-specific mouse APIs
 
+</td>
+<td width="50%" valign="top">
+
 #### **2. 🔊 Media & Volume Management**
 - Pinch gesture for volume adjustment
 - Windows: PyCaw (Core Audio API)
 - macOS: AppleScript integration
 - Visual feedback with current levels
 
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
 #### **3. 🌐 Browser Automation**
 - Tab switching (next/previous)
 - Smooth scroll with acceleration
 - Zoom in/out controls
 - Auto-focus browser detection
+
+</td>
+<td width="50%" valign="top">
 
 #### **4. 🪟 Window Management**
 - Application switcher (Alt+Tab equivalent)
@@ -111,6 +122,8 @@ The project includes pre-rendered GIF animations demonstrating each control mode
 - Multi-monitor support
 
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 #### **5. 🎮 Gaming Controls**
@@ -119,17 +132,28 @@ The project includes pre-rendered GIF animations demonstrating each control mode
 - Low-latency input (<50ms)
 - Anti-repeat gesture detection
 
+</td>
+<td width="50%" valign="top">
+
 #### **6. ⌨️ Virtual Keyboard**
 - Full QWERTY on-screen layout
 - Caps lock & special characters
 - Auto-focus target application
 - Click-to-type with visual feedback
 
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
 #### **7. 🚀 Custom App Launcher**
 - 5 programmable gesture slots
 - Launch any application/script
 - Cloud-synced across devices
 - Quick-access to favorites
+
+</td>
+<td width="50%" valign="top">
 
 #### **8. 💡 Brightness Control**
 - Gesture-based screen brightness
