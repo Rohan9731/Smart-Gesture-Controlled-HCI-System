@@ -363,67 +363,130 @@ pip list | grep -E "customtkinter|mediapipe|opencv-python"
 
 #### Step 5: Setup MongoDB Cloud Database
 
+> **⏱️ Time Required:** 10 minutes | **💰 Cost:** FREE Forever
+
 **5.1: Create Free MongoDB Atlas Account**
 
-1. Go to [mongodb.com/cloud/atlas/register](https://www.mongodb.com/cloud/atlas/register)
-2. Sign up with email (FREE tier)
-3. Create new project: `GestureControl`
+1. Open browser and go to: [mongodb.com/cloud/atlas/register](https://www.mongodb.com/cloud/atlas/register)
+2. Click **"Sign up"** 
+3. Enter your email, create password, click **"Create your Atlas account"**
+4. Verify your email address (check inbox)
+5. Complete the welcome survey (optional, can skip)
 
-**5.2: Create Cluster**
+---
 
-1. Click "Build a Cluster"
-2. Choose **FREE M0** (512 MB)
-3. Select cloud provider & region (closest to you)
-4. Cluster name: `Cluster0`
-5. Click "Create Cluster" (wait 3-5 min)
+**5.2: Create a FREE Database Cluster**
 
-**5.3: Create Database & Collection**
+1. After login, you'll see **"Deploy a cloud database"**
+2. Choose **"FREE"** option (M0 Sandbox - 512 MB)
+3. Select:
+   - **Cloud Provider:** AWS (recommended)
+   - **Region:** Choose closest to your location (e.g., Mumbai for India, N. Virginia for USA)
+4. **Cluster Name:** Keep default `Cluster0` or rename to `GestureCluster`
+5. Click **"Create Deployment"** button (green)
+6. ⏳ Wait 3-5 minutes while cluster is being created
 
-1. Click "Browse Collections"
-2. "Add My Own Data"
-3. Database name: **`hci`**
-4. Collection name: **`user-config`**
-5. Create
+---
 
-**5.4: Setup Network Access**
+**5.3: Create Database User (IMPORTANT)**
 
-1. Left sidebar: "Network Access"
-2. "Add IP Address"
-3. **"Allow Access from Anywhere"** (0.0.0.0/0)
-   - Or add your specific IP
-4. Confirm
+1. A popup will appear: **"Security Quickstart"**
+2. **Create a Database User:**
+   - **Username:** Enter any username (e.g., `gestureuser`)
+   - **Password:** Click **"Autogenerate Secure Password"** 
+   - ⚠️ **COPY THIS PASSWORD** - You'll need it later!
+   - Click **"Create User"**
 
-**5.5: Get Connection String**
+---
 
-1. Left sidebar: "Database"
-2. Click "Connect" on Cluster0
-3. "Connect your application"
-4. Driver: **Python**, Version: **3.6 or later**
-5. Copy connection string (example format):
+**5.4: Allow Network Access**
+
+1. In the same popup, scroll to **"Where would you like to connect from?"**
+2. Click **"My Local Environment"**
+3. Click **"Add My Current IP Address"**
+4. **IMPORTANT:** Click **"Add Entry"** again and enter:
+   - **IP Address:** `0.0.0.0/0`
+   - **Description:** `Allow from anywhere`
+   - Click **"Add Entry"**
+5. Click **"Finish and Close"**
+
+---
+
+**5.5: Create Database and Collection**
+
+1. Click on **"Browse Collections"** button
+2. Click **"Add My Own Data"**
+3. Create Database:
+   - **Database name:** Type exactly `hci`
+   - **Collection name:** Type exactly `user-config`
+4. Click **"Create"**
+
+---
+
+**5.6: Get Your Connection String**
+
+1. Go back to main page, click **"Database"** in left sidebar
+2. Find your cluster (Cluster0), click **"Connect"** button
+3. Select **"Drivers"**
+4. **Driver:** Python, **Version:** 3.12 or later
+5. You'll see a connection string like this:
    ```
-   mongodb+srv://<username>:<password>@<cluster>.mongodb.net/?retryWrites=true&w=majority
+   mongodb+srv://gestureuser:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
    ```
+6. Click **"Copy"** button
 
-**5.6: Create .env File**
+---
 
-In project root, create `.env`:
+**5.7: Configure .env File (FINAL STEP)**
 
-**Windows:**
+**📝 Windows Users:**
 ```powershell
-Copy-Item ".env.example" ".env"
+# Open Notepad
 notepad .env
 ```
 
-**macOS:**
+**📝 Mac/Linux Users:**
 ```bash
-cp .env.example .env
+# Open text editor
 nano .env
 ```
 
-**Edit `.env` and paste YOUR actual connection string:**
+**Paste this EXACTLY in the .env file:**
 ```env
-MONGODB.URI=mongodb+srv://<your-username>:<your-password>@<your-cluster>.mongodb.net/?retryWrites=true&w=majority
+MONGODB.URI=your-connection-string-here
 ```
+
+**🔧 Now REPLACE the connection string:**
+
+1. **Paste** the connection string you copied (right-click → Paste)
+2. **Replace** `<password>` with the password you saved earlier
+3. **Add database name** at the end:
+   - Find: `mongodb.net/`
+   - Change to: `mongodb.net/hci`
+
+**✅ Final .env file should look like:**
+```env
+MONGODB.URI=mongodb+srv://gestureuser:YourActualPassword123@cluster0.abc123.mongodb.net/hci?retryWrites=true&w=majority
+```
+
+**💾 Save the file:**
+- **Windows:** Ctrl+S, then close Notepad
+- **Mac:** Ctrl+O, Enter, then Ctrl+X
+
+---
+
+**✅ Verify Your Setup:**
+
+```bash
+# Check if .env file exists and has content
+# Windows:
+type .env
+
+# Mac:
+cat .env
+```
+
+You should see your MongoDB connection string!
 
 ---
 
