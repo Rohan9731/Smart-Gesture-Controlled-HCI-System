@@ -84,82 +84,98 @@ The project includes pre-rendered GIF animations demonstrating each control mode
 
 <table>
 <tr>
-<td width="50%" valign="top">
+<td width="50%" valign="top" style="padding: 15px;">
 
 #### **1. 🖱️ Precision Mouse Control**
-- Sub-pixel cursor positioning with smoothing
-- Left/right/middle click detection
-- Scroll gesture with speed control
-- Platform-specific mouse APIs
+<ul>
+<li>Sub-pixel cursor positioning with smoothing</li>
+<li>Left/right/middle click detection</li>
+<li>Scroll gesture with speed control</li>
+<li>Platform-specific mouse APIs</li>
+</ul>
 
 </td>
-<td width="50%" valign="top">
+<td width="50%" valign="top" style="padding: 15px;">
 
 #### **2. 🔊 Media & Volume Management**
-- Pinch gesture for volume adjustment
-- Windows: PyCaw (Core Audio API)
-- macOS: AppleScript integration
-- Visual feedback with current levels
+<ul>
+<li>Pinch gesture for volume adjustment</li>
+<li>Windows: PyCaw (Core Audio API)</li>
+<li>macOS: AppleScript integration</li>
+<li>Visual feedback with current levels</li>
+</ul>
 
 </td>
 </tr>
 <tr>
-<td width="50%" valign="top">
+<td width="50%" valign="top" style="padding: 15px;">
 
 #### **3. 🌐 Browser Automation**
-- Tab switching (next/previous)
-- Smooth scroll with acceleration
-- Zoom in/out controls
-- Auto-focus browser detection
+<ul>
+<li>Tab switching (next/previous)</li>
+<li>Smooth scroll with acceleration</li>
+<li>Zoom in/out controls</li>
+<li>Auto-focus browser detection</li>
+</ul>
 
 </td>
-<td width="50%" valign="top">
+<td width="50%" valign="top" style="padding: 15px;">
 
 #### **4. 🪟 Window Management**
-- Application switcher (Alt+Tab equivalent)
-- Show desktop gesture
-- Window minimize/restore
-- Multi-monitor support
+<ul>
+<li>Application switcher (Alt+Tab equivalent)</li>
+<li>Show desktop gesture</li>
+<li>Window minimize/restore</li>
+<li>Multi-monitor support</li>
+</ul>
 
 </td>
 </tr>
 <tr>
-<td width="50%" valign="top">
+<td width="50%" valign="top" style="padding: 15px;">
 
 #### **5. 🎮 Gaming Controls**
-- Directional movement (WASD/Arrows)
-- Jump/action commands
-- Low-latency input (<50ms)
-- Anti-repeat gesture detection
+<ul>
+<li>Directional movement (WASD/Arrows)</li>
+<li>Jump/action commands</li>
+<li>Low-latency input (&lt;50ms)</li>
+<li>Anti-repeat gesture detection</li>
+</ul>
 
 </td>
-<td width="50%" valign="top">
+<td width="50%" valign="top" style="padding: 15px;">
 
 #### **6. ⌨️ Virtual Keyboard**
-- Full QWERTY on-screen layout
-- Caps lock & special characters
-- Auto-focus target application
-- Click-to-type with visual feedback
+<ul>
+<li>Full QWERTY on-screen layout</li>
+<li>Caps lock &amp; special characters</li>
+<li>Auto-focus target application</li>
+<li>Click-to-type with visual feedback</li>
+</ul>
 
 </td>
 </tr>
 <tr>
-<td width="50%" valign="top">
+<td width="50%" valign="top" style="padding: 15px;">
 
 #### **7. 🚀 Custom App Launcher**
-- 5 programmable gesture slots
-- Launch any application/script
-- Cloud-synced across devices
-- Quick-access to favorites
+<ul>
+<li>5 programmable gesture slots</li>
+<li>Launch any application/script</li>
+<li>Cloud-synced across devices</li>
+<li>Quick-access to favorites</li>
+</ul>
 
 </td>
-<td width="50%" valign="top">
+<td width="50%" valign="top" style="padding: 15px;">
 
 #### **8. 💡 Brightness Control**
-- Gesture-based screen brightness
-- Windows: WMI integration
-- macOS: brightness CLI
-- Smooth transitions
+<ul>
+<li>Gesture-based screen brightness</li>
+<li>Windows: WMI integration</li>
+<li>macOS: brightness CLI</li>
+<li>Smooth transitions</li>
+</ul>
 
 </td>
 </tr>
