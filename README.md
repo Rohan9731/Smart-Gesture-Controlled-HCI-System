@@ -75,16 +75,16 @@ An enterprise-grade Human-Computer Interaction (HCI) system that enables **conta
 
 The project includes pre-rendered GIF animations demonstrating each control mode:
 
-| Mode | Animation File | Description |
-|------|---------------|-------------|
-| **Mouse Control** | `animations/6.gif` + `animations/17.gif` | Select mode with index finger, then use index + middle to move cursor |
-| **Media Control** | `animations/1.gif` + `animations/8.gif` | Select mode with index + middle, pinch thumb-index to adjust volume |
-| **Browser Control** | `animations/5.gif` + `animations/11.gif` | Select mode with 3 fingers, use thumb/little for tab navigation |
-| **Window Management** | `animations/4.gif` + `animations/11.gif` | Select mode with thumb + index, open little finger to switch windows |
-| **Brightness Control** | `animations/2.gif` + `animations/8.gif` | Select mode with thumb only, pinch to adjust screen brightness |
-| **Game Control** | `animations/15.gif` + `animations/18.gif` | Select mode with index + little, use directional gestures (WASD) |
-| **Virtual Keyboard** | `animations/16.gif` | Select mode with 4 fingers (no thumb), point and pinch to type |
-| **Custom App Launcher** | `animations/7.gif` + `animations/18.gif` | User-defined apps with 5 programmable gesture slots |
+| Mode | Left Hand (Mode Selection) | Right Hand (Action) | Description |
+|------|---------------------------|---------------------|-------------|
+| **Mouse Control** | ![Mode Select](animations/6.gif) | ![Action](animations/17.gif) | Select mode with index finger, then use index + middle to move cursor |
+| **Media Control** | ![Mode Select](animations/1.gif) | ![Action](animations/8.gif) | Select mode with index + middle, pinch thumb-index to adjust volume |
+| **Browser Control** | ![Mode Select](animations/5.gif) | ![Action](animations/11.gif) | Select mode with 3 fingers, use thumb/little for tab navigation |
+| **Window Management** | ![Mode Select](animations/4.gif) | ![Action](animations/11.gif) | Select mode with thumb + index, open little finger to switch windows |
+| **Brightness Control** | ![Mode Select](animations/2.gif) | ![Action](animations/8.gif) | Select mode with thumb only, pinch to adjust screen brightness |
+| **Game Control** | ![Mode Select](animations/15.gif) | ![Action](animations/18.gif) | Select mode with index + little, use directional gestures (WASD) |
+| **Virtual Keyboard** | ![Mode Select](animations/16.gif) | ![Action](animations/16.gif) | Select mode with 4 fingers (no thumb), point and pinch to type |
+| **Custom App Launcher** | ![Mode Select](animations/7.gif) | ![Action](animations/18.gif) | User-defined apps with 5 programmable gesture slots |
 
 *These tutorial assets are already included in the `animations/` folder and play automatically in the application's Tutorial mode.*
 
