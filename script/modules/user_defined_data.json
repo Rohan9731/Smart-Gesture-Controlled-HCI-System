@@ -3,24 +3,24 @@
   "name": "Rohan",
   "userDefinedControls": {
     "index": [
-      "msedge.exe",
-      "microsoft-edge:",
-      "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+      "mspaint.exe"
     ],
     "index and middle": [
-      "spotify.exe",
-      "C:\\Users\\%USERNAME%\\AppData\\Roaming\\Spotify\\Spotify.exe"
+      "mspaint.exe"
     ],
     "index, middle and ring": [
-      "excel.exe",
-      "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
+      "chrome.exe",
+      "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
     ],
     "index, middle, ring and little": [
-      "cmd.exe"
+      "code.exe",
+      "C:\\Users\\%USERNAME%\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+      "C:\\Program Files\\Microsoft VS Code\\Code.exe"
     ],
     "thumb": [
-      "winword.exe",
-      "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE"
+      "discord.exe",
+      "C:\\Users\\%USERNAME%\\AppData\\Local\\Discord\\app-1.0.9162\\Discord.exe"
     ]
   }
 }
