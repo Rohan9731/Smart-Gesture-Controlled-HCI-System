@@ -82,8 +82,6 @@ The project includes pre-rendered GIF animations demonstrating each control mode
 
 ## 💡 Core Features & Capabilities
 
-### 🎮 Eight Intelligent Control Modes
-
 <table>
 <tr>
 <td width="50%" valign="top">
@@ -370,27 +368,6 @@ pip install -r requirements_apple_silicon.txt
 pip list | grep -E "customtkinter|mediapipe|opencv-python"
 ```
 
-**⚠️ Troubleshooting Installation:**
-
-<details>
-<summary><b>Error: Microsoft Visual C++ 14.0 required (Windows)</b></summary>
-
-**Solution:**
-1. Download [Visual C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
-2. Install with "Desktop development with C++"
-3. Restart terminal and retry
-</details>
-
-<details>
-<summary><b>Error: Command 'python' not found (macOS)</b></summary>
-
-**Solution:** Use `python3` instead:
-```bash
-python3 -m venv .venv
-pip3 install -r requirements_apple_silicon.txt
-```
-</details>
-
 ---
 
 #### Step 5: Setup MongoDB Cloud Database
@@ -455,20 +432,6 @@ nano .env
 **Edit `.env` and paste YOUR actual connection string:**
 ```env
 MONGODB.URI=mongodb+srv://<your-username>:<your-password>@<your-cluster>.mongodb.net/?retryWrites=true&w=majority
-```
-
-**⚠️ CRITICAL SECURITY:** 
-- **NEVER** commit the `.env` file to Git
-- Replace ALL placeholder values with your actual credentials
-- The `.env` file is already protected by `.gitignore`
-
-**Verify:**
-```bash
-# Windows
-type .env
-
-# macOS
-cat .env
 ```
 
 ---
