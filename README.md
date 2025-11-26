@@ -671,9 +671,9 @@ pip3 install -r requirements_apple_silicon.txt
 2. Click "Connect" on Cluster0
 3. "Connect your application"
 4. Driver: **Python**, Version: **3.6 or later**
-5. Copy connection string:
+5. Copy connection string (example format):
    ```
-   mongodb+srv://username:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
+   mongodb+srv://<username>:<password>@<cluster>.mongodb.net/?retryWrites=true&w=majority
    ```
 
 **5.6: Create .env File**
@@ -682,22 +682,25 @@ In project root, create `.env`:
 
 **Windows:**
 ```powershell
-New-Item -Path ".env" -ItemType File
+Copy-Item ".env.example" ".env"
 notepad .env
 ```
 
 **macOS:**
 ```bash
-touch .env
+cp .env.example .env
 nano .env
 ```
 
-**Paste this (replace with YOUR connection string):**
+**Edit `.env` and paste YOUR actual connection string:**
 ```env
-MONGODB.URI=mongodb+srv://username:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
+MONGODB.URI=mongodb+srv://<your-username>:<your-password>@<your-cluster>.mongodb.net/?retryWrites=true&w=majority
 ```
 
-**⚠️ Important:** Replace `<password>` with your actual MongoDB password!
+**⚠️ CRITICAL SECURITY:** 
+- **NEVER** commit the `.env` file to Git
+- Replace ALL placeholder values with your actual credentials
+- The `.env` file is already protected by `.gitignore`
 
 **Verify:**
 ```bash
