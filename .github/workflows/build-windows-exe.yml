@@ -1,0 +1,50 @@
+name: Build Windows EXE
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements_windows.txt pyinstaller
+
+      - name: Build executable
+        run: |
+          pyinstaller --noconfirm --clean smart_gesture_hci.spec
+          if (Test-Path ".env.example") {
+            Copy-Item ".env.example" "dist/SmartGestureHCI/.env.example" -Force
+          }
+        shell: pwsh
+
+      - name: Create zip artifact
+        run: |
+          Compress-Archive -Path "dist/SmartGestureHCI/*" -DestinationPath "SmartGestureHCI-Windows-x64.zip" -Force
+        shell: pwsh
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SmartGestureHCI-Windows-x64
+          path: SmartGestureHCI-Windows-x64.zip
+
+      - name: Publish GitHub release asset
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: SmartGestureHCI-Windows-x64.zip

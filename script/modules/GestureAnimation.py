@@ -1,5 +1,7 @@
 from PIL import Image, ImageTk
 import customtkinter
+import os
+from script.path_utils import resource_path
 
 class GestureAnimation:
     def __init__(self, root, anchor, gif_path):
@@ -8,7 +10,7 @@ class GestureAnimation:
         self.anchor = anchor
 
         # Load the GIF
-        self.gif = Image.open(gif_path)
+        self.gif = Image.open(self._resolve_gif_path(gif_path))
         self.frames = []
         self.load_frames()
         self.runFlag = True
@@ -30,12 +32,18 @@ class GestureAnimation:
             self.frames.clear()
 
             # Load the new GIF
-            self.gif = Image.open(gif_path)
+            self.gif = Image.open(self._resolve_gif_path(gif_path))
             self.load_frames()
             self.runFlag = True
             self.display_frames()
         except Exception as e:
             pass
+
+    def _resolve_gif_path(self, gif_path):
+        normalized = gif_path.replace("\\", "/").strip("/")
+        parts = [part for part in normalized.split("/") if part]
+        resolved_path = resource_path(*parts) if parts else gif_path
+        return resolved_path if os.path.exists(resolved_path) else gif_path
 
     def load_frames(self):
         try:

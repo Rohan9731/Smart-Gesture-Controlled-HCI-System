@@ -3,6 +3,7 @@ import subprocess
 import os
 import time
 import sys
+from script.path_utils import user_data_path
 
 
 class UserDefControls:
@@ -14,7 +15,7 @@ class UserDefControls:
 
         # Load the JSON file
         try:
-            with open("./script/modules/user_defined_data.json", "r") as file:
+            with open(user_data_path(), "r", encoding="utf-8") as file:
                 self.app_data = json.load(file)
                 print("[DEBUG] Loaded user_defined_data.json successfully")
         except Exception as e:

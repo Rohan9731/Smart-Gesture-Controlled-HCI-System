@@ -16,6 +16,7 @@ from script.modules.user_def_controls import UserDefControls
 from script.modules.mouse_control import MouseControl
 from script.modules.game_control import GameControl
 from script.modules.virtual_keyboard import VirtualKeyboard
+from script.path_utils import user_data_path
 
 
 class GestureControl:
@@ -55,7 +56,7 @@ class GestureControl:
     def get_keyboard_target_app(self):
         """Load the target app name for keyboard gesture from user_defined_data.json"""
         try:
-            with open("./script/modules/user_defined_data.json", "r") as file:
+            with open(user_data_path(), "r", encoding="utf-8") as file:
                 data = json.load(file)
                 # Get the app configured for "index, middle, ring and little" gesture (keyboard)
                 keyboard_gesture_config = data.get("userDefinedControls", {}).get("index, middle, ring and little")

@@ -44,6 +44,7 @@ desktop.ini
 # Project specific
 *.log
 preview_readme.html
+SmartGestureHCI-Windows-x64.zip
 
 # Temporary files
 *.tmp

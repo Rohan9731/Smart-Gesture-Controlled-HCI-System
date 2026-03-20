@@ -20,10 +20,15 @@ import os
 from script.gesture_control import GestureControl
 import threading
 from script.modules.GestureAnimation import GestureAnimation
+from script.path_utils import app_runtime_dir, resource_path, user_data_path
 from PIL import Image, ImageTk
 import cv2
 
-load_dotenv()
+env_file = os.path.join(app_runtime_dir(), ".env")
+if os.path.exists(env_file):
+    load_dotenv(env_file)
+else:
+    load_dotenv()
 
 def get_unique_id():
     mac = uuid.UUID(int=uuid.getnode()).hex[-12:]
@@ -41,11 +46,13 @@ collection = db["user-config"]
 
 customGestureJson = collection.find_one({"_id": unique_id})
 
-f = open("resources\\appList.json", "r")
-data = json.load(f)
+user_data_file = user_data_path()
 
-f = open("resources\\anim_data.json", "r")
-anim_data = json.load(f)
+with open(resource_path("resources", "appList.json"), "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+with open(resource_path("resources", "anim_data.json"), "r", encoding="utf-8") as f:
+    anim_data = json.load(f)
 
 if customGestureJson == None:
     collection.insert_one(
@@ -64,13 +71,19 @@ if customGestureJson == None:
 
     customGestureJson = collection.find_one({"_id": unique_id})
 
-    with open("./script/modules/user_defined_data.json", "w") as f:
+    with open(user_data_file, "w", encoding="utf-8") as f:
         json.dump(customGestureJson, f)
+
+if customGestureJson is not None:
+    with open(user_data_file, "w", encoding="utf-8") as f:
+        json.dump(customGestureJson, f, indent=2)
 
 app = customtkinter.CTk()
 app.title("Smart Gesture-Controlled HCI System")
 app.geometry("1100x600")
-app.iconbitmap("resources\\dark.ico")
+icon_path = resource_path("resources", "dark.ico")
+if os.path.exists(icon_path):
+    app.iconbitmap(icon_path)
 
 # system mode
 customtkinter.set_appearance_mode("dark")
@@ -295,7 +308,7 @@ def saveGestures(data):
         collection.update_one({"_id": unique_id}, {"$set": customGestureJson})
         
         # Save to local JSON file
-        with open("./script/modules/user_defined_data.json", "w") as f:
+        with open(user_data_file, "w", encoding="utf-8") as f:
             json.dump(customGestureJson, f, indent=2)
         
         print(f"[DEBUG] Gestures saved successfully")
