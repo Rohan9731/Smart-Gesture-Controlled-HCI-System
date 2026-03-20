@@ -39,6 +39,12 @@ Inside dist/SmartGestureHCI:
 1. Copy .env.example to .env
 2. Edit .env and set MONGODB.URI
 
+Notes:
+
+- If MONGODB.URI is missing or MongoDB is temporarily unreachable, the app still starts in local mode.
+- Local mode stores gesture configuration at %APPDATA%/SmartGestureHCI/user_defined_data.json.
+- Add a valid MONGODB.URI to re-enable cloud sync across devices.
+
 Expected app data location after first launch:
 
 - %APPDATA%/SmartGestureHCI/user_defined_data.json

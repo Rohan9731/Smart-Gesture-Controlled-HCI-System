@@ -35,18 +35,78 @@ def get_unique_id():
     hostname = socket.gethostname()
     return f"{mac}-{hostname}"
 
+
+def default_user_controls():
+    return {
+        "index": "null",
+        "index and middle": "null",
+        "index, middle and ring": "null",
+        "index, middle, ring and little": "null",
+        "thumb": "null",
+    }
+
+
+def normalize_user_config(doc, device_id):
+    normalized = {
+        "_id": device_id,
+        "name": socket.gethostname(),
+        "userDefinedControls": default_user_controls(),
+    }
+
+    if isinstance(doc, dict):
+        controls = doc.get("userDefinedControls")
+        if isinstance(controls, dict):
+            for key in normalized["userDefinedControls"]:
+                if key in controls:
+                    normalized["userDefinedControls"][key] = controls[key]
+
+    return normalized
+
+
 unique_id = get_unique_id()
 print(unique_id)
 
-client = pymongo.MongoClient(os.getenv("MONGODB.URI"))
-
-db = client["hci"]
-
-collection = db["user-config"]
-
-customGestureJson = collection.find_one({"_id": unique_id})
-
 user_data_file = user_data_path()
+
+customGestureJson = normalize_user_config({}, unique_id)
+if os.path.exists(user_data_file):
+    try:
+        with open(user_data_file, "r", encoding="utf-8") as f:
+            customGestureJson = normalize_user_config(json.load(f), unique_id)
+    except Exception as e:
+        print(f"[WARN] Could not read local config, using defaults: {e}")
+
+client = None
+collection = None
+mongo_uri = os.getenv("MONGODB.URI")
+
+if mongo_uri:
+    try:
+        client = pymongo.MongoClient(
+            mongo_uri,
+            serverSelectionTimeoutMS=5000,
+            connectTimeoutMS=5000,
+            socketTimeoutMS=5000,
+        )
+        client.admin.command("ping")
+        db = client["hci"]
+        collection = db["user-config"]
+
+        cloud_doc = collection.find_one({"_id": unique_id})
+        if cloud_doc is None:
+            collection.insert_one(customGestureJson)
+        else:
+            customGestureJson = normalize_user_config(cloud_doc, unique_id)
+
+        print("[INFO] Connected to MongoDB Atlas")
+    except Exception as e:
+        print(f"[WARN] MongoDB unavailable, running in local mode: {e}")
+        if client is not None:
+            client.close()
+            client = None
+        collection = None
+else:
+    print("[WARN] MONGODB.URI not set, running in local mode")
 
 with open(resource_path("resources", "appList.json"), "r", encoding="utf-8") as f:
     data = json.load(f)
@@ -54,29 +114,8 @@ with open(resource_path("resources", "appList.json"), "r", encoding="utf-8") as 
 with open(resource_path("resources", "anim_data.json"), "r", encoding="utf-8") as f:
     anim_data = json.load(f)
 
-if customGestureJson == None:
-    collection.insert_one(
-        {
-            "_id": unique_id,
-            "name": socket.gethostname(),
-            "userDefinedControls": {
-                "index": "null",
-                "index and middle": "null",
-                "index, middle and ring": "null",
-                "index, middle, ring and little": "null",
-                "thumb": "null",
-            },
-        }
-    )
-
-    customGestureJson = collection.find_one({"_id": unique_id})
-
-    with open(user_data_file, "w", encoding="utf-8") as f:
-        json.dump(customGestureJson, f)
-
-if customGestureJson is not None:
-    with open(user_data_file, "w", encoding="utf-8") as f:
-        json.dump(customGestureJson, f, indent=2)
+with open(user_data_file, "w", encoding="utf-8") as f:
+    json.dump(customGestureJson, f, indent=2)
 
 app = customtkinter.CTk()
 app.title("Smart Gesture-Controlled HCI System")
@@ -302,17 +341,20 @@ def saveGestures(data):
             if not found:
                 userDefinedControls[gesture_name] = "null"
     
-    # Update database and JSON file
-    if customGestureJson is not None:
-        customGestureJson["userDefinedControls"] = userDefinedControls
-        collection.update_one({"_id": unique_id}, {"$set": customGestureJson})
-        
-        # Save to local JSON file
-        with open(user_data_file, "w", encoding="utf-8") as f:
-            json.dump(customGestureJson, f, indent=2)
-        
-        print(f"[DEBUG] Gestures saved successfully")
-        print(f"[DEBUG] Saved config: {userDefinedControls}")
+    # Always save locally; sync to MongoDB when available.
+    customGestureJson["userDefinedControls"] = userDefinedControls
+
+    with open(user_data_file, "w", encoding="utf-8") as f:
+        json.dump(customGestureJson, f, indent=2)
+
+    if collection is not None:
+        try:
+            collection.update_one({"_id": unique_id}, {"$set": customGestureJson}, upsert=True)
+        except Exception as e:
+            print(f"[WARN] Could not sync config to MongoDB: {e}")
+
+    print(f"[DEBUG] Gestures saved successfully")
+    print(f"[DEBUG] Saved config: {userDefinedControls}")
 
 
 ############################################################################################################
@@ -814,4 +856,5 @@ if ges_con and hasattr(ges_con, 'runFlag'):
 if ges_con_thread and ges_con_thread.is_alive():
     ges_con_thread.join()
 
-client.close()
+if client is not None:
+    client.close()
